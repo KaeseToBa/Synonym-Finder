@@ -1,0 +1,12 @@
+{
+  "manifest_version": 2,
+
+  "name": "Synonym Finder",
+  "description": "Find synonyms for the requested word",
+  "version": "1.0",
+  "content_security_policy": "script-src 'self' https://www.openthesaurus.de; object-src 'self'",
+
+  "browser_action": {
+    "default_popup": "index.html"
+  }
+}

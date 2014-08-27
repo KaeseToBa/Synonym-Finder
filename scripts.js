@@ -6,10 +6,9 @@
  * 
  * Comments in code are in german.
  */
-
+   
 $(document).ready(function(){
-    $("#sendButton").click(function(){
-
+    $("#sendButton").click(function(){  
         // Eingabe mit immer gleicher Syntax: Erster Buchstabe groß, Rest klein
         var inputForRequest = $("input[name=inputForRequest]").val().charAt(0).toUpperCase() + $("input[name=inputForRequest]").val().substring(1,$("input[name=inputForRequest]").val().length).toLowerCase();
         
