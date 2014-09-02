@@ -4,7 +4,9 @@ var pnl = require("sdk/panel");
 var word;
 
 var cntntPnl = pnl.Panel({
-    contentURL: data.url("content.html"), 
+    width: 270,
+    height: 180,
+    contentURL: data.url("content.html")
 });
 
 var synFindItem = cm.Item({
@@ -13,23 +15,30 @@ var synFindItem = cm.Item({
   context: cm.PredicateContext( function predicateFunction(context) {
       var selText = context.selectionText;
       if (selText != null && selText != "" && !selText.match("^\w*\S*\w$")) {
-    	  console.log("selection predicate true");
     	  return true;
       }
       return false;
   }),
   
-  contentScript: 'self.on("click", function () {' +
+  contentScript: 'self.on("click", function (event) {' +
                     'var selText = window.getSelection().toString(); ' +
-                    'console.log("selText: " + selText); ' +
                     'self.postMessage(selText); ' +
                   '});',
                     
   onMessage: function(word) {
       word = word.charAt(0).toUpperCase() + word.substring(1,word.length).toLowerCase();
-      console.log("send word: " + word);
       cntntPnl.show();
       cntntPnl.port.emit("getWord", word);
      }
 });
 
+cntntPnl.port.on("resizePanel", function getHeight(height) {
+    console.log("resizePanel" + height);
+    if (height >= cntntPnl.height) {
+        height = height > 500 ? 500 : height;
+        cntntPnl.resize(270, height);
+    }
+    else {
+        cntntPnl.resize(270, 180);
+    }
+});

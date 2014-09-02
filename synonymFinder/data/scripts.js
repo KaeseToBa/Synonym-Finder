@@ -59,16 +59,6 @@ $(document).ready(function(){
 
                            $("#answer").append(t); // Jeden einzelnen term in <body> ausgeben                           
 
-                           if($("#levelCheckBox").is(":checked"))
-                           {
-                               // Level Attribut vorhanden? Wenn ja, an den Term ranhängen.                          
-                               if(terms[j].level)
-                               {
-                                   level = JSON.stringify(terms[j].level).substr(1,JSON.stringify(terms[j].level.length));
-                                   $("#answer").append(" (" + level + ")");
-                               }
-                           } 
-                           
                            if(j != terms.length-1)
                            {
                                $("#answer").append(", ");
@@ -78,7 +68,7 @@ $(document).ready(function(){
                 }
 
                 // Similiar Terms = Aehnliche Begriffe zur Eingabe
-                var similarTerms = data.similarterms;  // JASON-Objekt
+                var similarTerms = data.similarterms;  // JSON-Objekt
                                 
                 $("#simTermsHead").html("<br>Ähnliche Begriffe:<br>");
                
@@ -122,6 +112,11 @@ $(document).ready(function(){
                 }
                 
             });
+
+            $("#ergContainer").css("display", "block");
+
+            var height = $("div#ergContainer").outerHeight() + $("div#searchContainer").outerHeight();
+            addon.port.emit("resizePanel", height + 30);
         }
     }); 
     

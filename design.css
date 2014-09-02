@@ -1,4 +1,8 @@
 /*Button Style*/
+* {
+    background-color:#00CCFF;
+    color:#484848;
+}
 #sendButton {
 	background-color:#ff7b00;
 	text-indent:0;
